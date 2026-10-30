@@ -1,32 +1,88 @@
-# React + TypeScript + Vite
+# РеактПростір
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Навчальний односторінковий застосунок на React і TypeScript. Проєкт демонструє маршрутизацію за допомогою React Router, генерацію маршрутів і навігації з масиву об'єктів та інтерактивні компоненти на кожній сторінці.
 
-Currently, two official plugins are available:
+## Можливості
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Навігація між головною сторінкою, сторінкою про нас і контактною сторінкою без перезавантаження.
+- Активне посилання в меню підсвічується відповідно до поточного маршруту.
+- Маршрути створюються через `createBrowserRouter`, а застосунок підключається за допомогою `RouterProvider`.
+- Масив конфігурації сторінок використовується і для побудови маршрутів, і для навігаційних посилань.
+- На головній сторінці кнопка перемикає ідеї, на сторінці про нас можна переглянути принципи, а контактна форма демонструє валідацію та стан підтвердження.
+- Адаптивний дизайн із підтримкою системного налаштування зменшення анімації.
 
-## React Compiler
+> Контактна форма є демонстраційною: дані не надсилаються на сервер.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Технології
 
-## Expanding the Oxlint configuration
+- React 19
+- TypeScript
+- React Router 8 (`createBrowserRouter`, `RouterProvider`, `NavLink`)
+- Vite 8
+- Oxlint
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Вимоги
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+- Node.js `^20.19.0` або `>=22.12.0` (вимога Vite 8)
+- npm
+
+Перевірити версії можна командами:
+
+```bash
+node --version
+npm --version
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Встановлення та запуск
+
+Клонуйте репозиторій і перейдіть до його каталогу:
+
+```bash
+git clone https://github.com/freshfenix/react-6.git
+cd react-6
+```
+
+Встановіть залежності та запустіть сервер розробки:
+
+```bash
+npm install
+npm run dev
+```
+
+Відкрийте адресу, яку Vite покаже в терміналі (зазвичай `http://localhost:5173`). Сервер підтримує гаряче оновлення під час розробки.
+
+## Команди
+
+| Команда | Призначення |
+| --- | --- |
+| `npm run dev` | Запустити локальний сервер розробки |
+| `npm run build` | Перевірити TypeScript і створити production-збірку в `dist/` |
+| `npm run preview` | Локально переглянути зібрану версію |
+| `npm run lint` | Перевірити код за допомогою Oxlint |
+
+## Маршрути
+
+| Шлях | Сторінка |
+| --- | --- |
+| `/` | Головна |
+| `/about` | Про нас |
+| `/contact` | Контакти |
+| Інший шлях | Сторінка 404 із посиланням на головну |
+
+## Структура проєкту
+
+```text
+src/
+├── components/
+│   ├── About.tsx
+│   ├── Contact.tsx
+│   └── Home.tsx
+├── App.tsx       # Конфігурація маршрутів та загальне компонування
+├── App.css       # Стилі застосунку й інтерактивних елементів
+├── index.css     # Базові стилі
+└── main.tsx      # Точка входу React
+```
+
+## Додавання сторінки
+
+У `src/App.tsx` сторінки описані в масиві `pages`. Щоб додати сторінку, створіть React-компонент у `src/components/` та додайте об'єкт із `path`, `label` і `element` до цього масиву. Маршрут і посилання меню сформуються на його основі.
